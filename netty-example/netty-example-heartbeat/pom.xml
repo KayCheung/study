@@ -5,36 +5,38 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.housaire</groupId>
-        <artifactId>spring-example</artifactId>
+        <artifactId>netty-example</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <groupId>com.housaire</groupId>
-    <artifactId>spring-example-returnvalue</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>spring-example-returnvalue</name>
-    <url>http://maven.apache.org</url>
+    <artifactId>netty-example-heartbeat</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>netty-example-heartbeat</name>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.lettuce</groupId>
-            <artifactId>lettuce-core</artifactId>
-            <version>5.1.3.RELEASE</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

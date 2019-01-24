@@ -35,4 +35,12 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    public static void main(String[] args)
+    {
+        Integer integer = null;
+        String str = "hello " + integer;
+        System.out.println(str);
+    }
+
 }

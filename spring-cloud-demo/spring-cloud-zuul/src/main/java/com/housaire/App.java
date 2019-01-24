@@ -9,21 +9,23 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @EnableZuulProxy
 @SpringCloudApplication
-public class App 
+public class App
 {
 
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
-    	new SpringApplicationBuilder(App.class).web(true).run(args);
+        new SpringApplicationBuilder(App.class).web(true).run(args);
     }
-    
+
     @RunWith(JUnit4.class)
-    public static class UnitTest {
-    	
-    	@Test
-    	public void test() {
-    		System.out.println("hello");
-    	}
-    	
+    public static class UnitTest
+    {
+
+        @Test
+        public void test()
+        {
+            System.out.println("hello");
+        }
+
     }
 }
