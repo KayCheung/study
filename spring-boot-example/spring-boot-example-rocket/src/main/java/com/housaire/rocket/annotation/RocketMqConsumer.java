@@ -1,5 +1,7 @@
 package com.housaire.rocket.annotation;
 
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
+
 import java.lang.annotation.*;
 
 /**
@@ -29,5 +31,12 @@ public @interface RocketMqConsumer
      * @return
      */
     String groupName();
+
+    /**
+     * 消息模式
+     * @see  MessageModel
+     * @return
+     */
+    MessageModel model() default MessageModel.CLUSTERING;
 
 }

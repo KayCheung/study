@@ -51,6 +51,7 @@ public class RocketMqConsumerBean implements DisposableBean, BeanPostProcessor
                 log.info("RocketMQ Consumer 注册 '[{}]'", beanName);
                 RocketMqConsumer rocketMqConsumer = beanClass.getAnnotation(RocketMqConsumer.class);
                 DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(rocketMqConsumer.groupName());
+                consumer.setMessageModel(rocketMqConsumer.model());
                 consumer.setNamesrvAddr(rocketMqProperties.getNamesrvAddr());
                 if (beanClass.isAnnotationPresent(RocketMqExpression.class))
                 {
