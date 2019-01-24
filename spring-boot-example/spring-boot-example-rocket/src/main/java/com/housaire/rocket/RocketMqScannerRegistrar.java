@@ -15,7 +15,7 @@ import org.springframework.core.type.filter.AssignableTypeFilter;
 import java.util.Objects;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
  * @date 2019/1/23 14:01
  * @see
