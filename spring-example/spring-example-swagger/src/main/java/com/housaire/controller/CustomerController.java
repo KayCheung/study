@@ -3,11 +3,17 @@ package com.housaire.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.housaire.model.*;
+import com.housaire.service.CustomerService;
+import com.housaire.service.CustomerServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 
 @Api("客户管理")
 @RestController
@@ -15,9 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class CustomerController
 {
 
+    @Autowired
+    @Qualifier("customerService")
+    private CustomerService customerService;
+
     @ApiOperation("新增客户并返回客户ID")
     @PostMapping
-    public Long addCustomer(@RequestBody CustomerModel CustomerModel) {
+    public Long addCustomer(@RequestBody CustomerModel customerModel) {
+        customerService.addCustomer(customerModel);
         return 100L;
     }
 

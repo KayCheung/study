@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ConsumerClient {
 
 	@RequestMapping(value = "/sayhello", method = RequestMethod.GET)
-	public String sayHello(@RequestParam("name") String name);
+	String sayHello(@RequestParam("name") String name);
 	
 }
