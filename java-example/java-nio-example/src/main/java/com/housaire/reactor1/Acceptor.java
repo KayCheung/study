@@ -1,7 +1,6 @@
-package com.housaire.reactor;
+package com.housaire.reactor1;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;

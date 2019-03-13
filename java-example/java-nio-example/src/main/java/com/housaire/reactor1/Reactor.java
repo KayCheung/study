@@ -1,4 +1,4 @@
-package com.housaire.reactor;
+package com.housaire.reactor1;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -83,6 +83,7 @@ public class Reactor implements Runnable
         {
             while (!Thread.interrupted())
             {
+                System.err.println(Thread.currentThread().getName() + " 执行Selector.select");
                 selector.select();
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
                 // Selector如果发现channel有OP_ACCEPT或READ事件发生，下列遍历就会进行。
@@ -97,6 +98,7 @@ public class Reactor implements Runnable
                      * 第二次触发此方法，获取(OP_READ)selectionKey.attachment()为new出来的SocketReadHandler
                      * SocketReadHandler run()方法里面为 socketChannel.read(inputBuffer); 实际处理的逻辑代码
                      */
+                    System.err.println(Thread.currentThread().getName() + " 处理SelectionKey");
                     dispatch(selectionKey);
                 }
                 /*

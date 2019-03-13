@@ -1,4 +1,4 @@
-package com.housaire.reactor;
+package com.housaire.reactor1;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.*;
@@ -10,18 +10,18 @@ import java.util.concurrent.*;
  * @see
  * @since 1.0.0
  */
-public final class ExecutorHandler
+public final class ExecutionHandler
 {
 
-    private final static ExecutorHandler executorHandler = new ExecutorHandler();
+    private final static ExecutionHandler executionHandler = new ExecutionHandler();
 
     private ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    private ExecutorHandler() {}
+    private ExecutionHandler() {}
 
-    public static ExecutorHandler getExecutorHandler()
+    public static ExecutionHandler getExecutionHandler()
     {
-        return executorHandler;
+        return executionHandler;
     }
 
     public void execute(ByteBuffer byteBuffer, Runnable callback)
@@ -30,7 +30,10 @@ public final class ExecutorHandler
         try
         {
             String response = future.get();
-            callback.run();
+//            if (null != response && response.trim().length() > 0)
+//            {
+                callback.run();
+//            }
         }
         catch (Exception e)
         {
