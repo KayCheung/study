@@ -7,7 +7,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Objects;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
  * @date 2019/3/12 14:53
  * @see
@@ -44,7 +44,7 @@ public class Acceptor implements Runnable
              */
             if (!Objects.isNull(socketChannel))
             {
-                new SocketReadHandler(this.selector, socketChannel);
+                new SocketReadWriteHandler(this.selector, socketChannel);
             }
         }
         catch (IOException e)

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
  * @date 2019/3/13 16:13
  * @see
@@ -32,7 +32,7 @@ public class SubReactor extends Reactor
         // 将新的套接口SocketChannel注册到选择器Selector上
         SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
         // 添加附加对象
-        selectionKey.attach(new SocketReadHandler(socketChannel));
+        selectionKey.attach(new SocketReadWriteHandler(socketChannel));
         openSelector.countDown();
     }
 

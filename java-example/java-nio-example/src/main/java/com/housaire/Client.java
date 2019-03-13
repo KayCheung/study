@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
  * @date 2019/3/12 15:26
  * @see

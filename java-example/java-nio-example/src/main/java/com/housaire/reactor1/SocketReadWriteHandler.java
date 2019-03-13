@@ -1,31 +1,42 @@
-package com.housaire.reactor2;
+package com.housaire.reactor1;
 
-import com.housaire.reactor1.ExecutionHandler;
+import com.housaire.ExecutionHandler;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.logging.Logger;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
- * @date 2019/3/13 15:43
+ * @date 2019/3/12 15:04
  * @see
  * @since 1.0.0
  */
-public class SocketReadHandler implements Runnable
+public class SocketReadWriteHandler implements Runnable
 {
-
-    private static final Logger log = Logger.getLogger(SocketReadHandler.class.getName());
 
     private SocketChannel socketChannel;
 
-    public SocketReadHandler(SocketChannel socketChannel)
+    public SocketReadWriteHandler(Selector selector, SocketChannel socketChannel) throws IOException
     {
         this.socketChannel = socketChannel;
+        this.socketChannel.configureBlocking(false);
+        SelectionKey selectionKey = this.socketChannel.register(selector, SelectionKey.OP_READ);
+        //同时将SelectionKey标记为可读，以便读取。
+        selectionKey.interestOps(SelectionKey.OP_READ);
+        //将该socketChannel注册的SelectionKey绑定为本SocketReadHandler
+        //下一步有事件触发时，将调用本类的run方法。
+        //参看dispatch(SelectionKey key)
+        selectionKey.attach(this);
+        selector.wakeup();
     }
 
+    /**
+     * 处理读取数据
+     */
     @Override
     public void run()
     {
@@ -35,10 +46,11 @@ public class SocketReadHandler implements Runnable
         {
             this.socketChannel.read(byteBuffer);
             // 激活线程池 处理这些request
+            // requestHandle(new Request(socket,btt));
             ExecutionHandler.getExecutionHandler().execute(byteBuffer, () -> {
                 try
                 {
-                    log.info("回写客户端...");
+                    System.out.println("回写客户端...");
                     this.socketChannel.write(ByteBuffer.wrap("收到了你的请求".getBytes("UTF-8")));
                 }
                 catch (IOException e)

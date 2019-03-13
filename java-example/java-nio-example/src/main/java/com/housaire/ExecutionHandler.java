@@ -1,11 +1,11 @@
-package com.housaire.reactor1;
+package com.housaire;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.*;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
- * @description:
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
+ * 仅供测试使用
  * @date 2019/3/12 15:20
  * @see
  * @since 1.0.0

@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
+ * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * 经典的网络服务在每个线程中完成对数据的处理：
  * 但这种模式在用户负载增加时，性能将下降非常的快。
  * 系统运行的性能瓶颈通常在I/O读写，包括对端口和文件的操作上，过去，在打 开一个I/O通道后，
