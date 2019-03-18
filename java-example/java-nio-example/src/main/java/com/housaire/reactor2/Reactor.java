@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author <a href="mailto:cheungkay@sina.com">张凯</a>
  * @description:
  * @date 2019/3/13 09:39
- * @see
+ * @see <a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf?tdsourcetag=s_pctim_aiomsg">Scalable IO in Java</a>
  * @since 1.0.0
  */
 public abstract class Reactor implements Runnable
@@ -41,8 +41,13 @@ public abstract class Reactor implements Runnable
                 {
                     dispatch(it.next());
                 }
-                // 将SelectionKey集合进行清空
-                selectionKeys.clear();
+                if (!selectionKeys.isEmpty())
+                {
+                    // 唤醒阻塞在Selector.select上的线程
+                    getSelector().wakeup();
+                    // 将SelectionKey集合进行清空
+                    selectionKeys.clear();
+                }
             }
             catch (IOException e)
             {
@@ -55,8 +60,6 @@ public abstract class Reactor implements Runnable
     {
         Runnable runnable = (Runnable) selectionKey.attachment();
         runnable.run();
-        // 唤醒阻塞在Selector.select上的线程
-        getSelector().wakeup();
     }
 
 }

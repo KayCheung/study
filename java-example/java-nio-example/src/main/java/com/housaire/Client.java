@@ -30,11 +30,11 @@ public class Client
             System.out.println("请输入：");
             input = scanner.nextLine();
             out.write(input.getBytes("UTF-8"));
-            byte[] b = new byte[8192];
+            /*byte[] b = new byte[8192];
             if (in.read(b) > -1)
             {
                 System.err.println("服务端回写：" + new String(b, "UTF-8"));
-            }
+            }*/
         } while (null != input &&
                 !input.equalsIgnoreCase("quit") &&
                 !input.equalsIgnoreCase("exit"));

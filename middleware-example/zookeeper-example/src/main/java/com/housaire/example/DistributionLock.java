@@ -1,4 +1,4 @@
-package com.study.demo;
+package com.housaire.example;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;

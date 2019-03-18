@@ -1,4 +1,4 @@
-package com.study.demo;
+package com.housaire.example;
 
 import java.io.IOException;
 import java.util.List;

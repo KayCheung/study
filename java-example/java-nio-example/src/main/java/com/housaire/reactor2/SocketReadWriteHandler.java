@@ -29,7 +29,7 @@ public class SocketReadWriteHandler implements Runnable
     @Override
     public void run()
     {
-        System.out.println("客户端数据写入...");
+       log.info("客户端数据写入...");
         ByteBuffer byteBuffer = ByteBuffer.allocate(8192);
         try
         {

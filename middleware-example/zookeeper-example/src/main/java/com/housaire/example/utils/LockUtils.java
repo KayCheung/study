@@ -1,4 +1,4 @@
-package com.study.demo.utils;
+package com.housaire.example.utils;
 
 import org.apache.curator.framework.recipes.locks.InterProcessLock;
 
