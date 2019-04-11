@@ -35,5 +35,8 @@
     <modules>
         <module>zookeeper-example</module>
     <module>redis-example</module>
+    <module>rabbitmq-example</module>
+    <module>kafka-example</module>
+    <module>rocketmq-example</module>
   </modules>
 </project>

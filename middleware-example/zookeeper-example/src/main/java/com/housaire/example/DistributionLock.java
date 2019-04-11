@@ -27,6 +27,7 @@ public class DistributionLock {
 			Thread t = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					InterProcessLock lock = new InterProcessMutex(client, "/mutex_lock");
 					try {
 						System.out.println(Thread.currentThread().getName() + " 等待其他线程进入运行状态");
 						cyclicBarrier.await();
@@ -34,7 +35,6 @@ public class DistributionLock {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					InterProcessLock lock = new InterProcessMutex(client, "/mutex_lock");
 					try {
 						lock.acquire();
 						System.err.println(Thread.currentThread().getName() + " 获得了锁！");
