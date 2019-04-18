@@ -9,5 +9,7 @@
 
   <modules>
     <module>java-nio-example</module>
+    <module>java-algorithm-example</module>
+    <module>java-classloader-example</module>
   </modules>
 </project>

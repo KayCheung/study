@@ -19,8 +19,8 @@ public class RocketMqProducerMain
     public static void main(String[] args) throws InterruptedException, RemotingException, MQClientException, MQBrokerException
     {
 
-        DefaultMQProducer producer = new DefaultMQProducer();
-        producer.setNamesrvAddr("");
+        DefaultMQProducer producer = new DefaultMQProducer("ROCKETMQ_PRODUCER");
+        producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 
         producer.send(new Message("test", "hello rocketmq".getBytes()));

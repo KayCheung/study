@@ -25,11 +25,11 @@ public class KafkaProducerMain
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
-        properties.setProperty(ProducerConfig.ACKS_CONFIG, "0");
+        properties.setProperty(ProducerConfig.ACKS_CONFIG, "-1");
 
         Producer<String, String> producer = new KafkaProducer<>(properties);
 
-        ProducerRecord<String, String> record = new ProducerRecord<>("kafka_topic", 2, "kafkaMsg","Hello Kafka!  -  " + Calendar.getInstance().getTime().toLocaleString());
+        ProducerRecord<String, String> record = new ProducerRecord<>("kafka_multip_partition", 0,"kafkaMsg","Hello Kafka!  -  " + Calendar.getInstance().getTime().toLocaleString());
 
         RecordMetadata recordMetadata = producer.send(record).get();
 

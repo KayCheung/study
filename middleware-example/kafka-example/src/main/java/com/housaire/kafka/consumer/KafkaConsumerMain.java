@@ -6,10 +6,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -24,8 +21,8 @@ public class KafkaConsumerMain
 
     public static void main(String[] args)
     {
-        String serversConfig = "localhost:39092";
-        String groupId = "3";
+        String serversConfig = "localhost:19092,localhost:29092,localhost:39092";
+        String groupId = "a";
 
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, serversConfig);
@@ -34,18 +31,22 @@ public class KafkaConsumerMain
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
         Consumer<String, String> consumer = new KafkaConsumer<>(properties);
-        consumer.partitionsFor("kafka_topic").forEach(partitionInfo -> {
+        List<TopicPartition> topicPartitions = new ArrayList<>();
+        consumer.partitionsFor("kafka_multip_partition").forEach(partitionInfo -> {
             System.out.println("Partition ID:  " + partitionInfo.partition());
             System.out.println("Partition Leader:  " + partitionInfo.leader().toString());
             System.out.println("Partition Replicas:  " + partitionInfo.replicas().length);
+            topicPartitions.add(new TopicPartition(partitionInfo.topic(), partitionInfo.partition()));
         });
+        topicPartitions.remove(1);
+        topicPartitions.remove(0);
+        consumer.assign(topicPartitions);
 
-        TopicPartition topicPartition = new TopicPartition("kafka_topic", 2);
-        consumer.assign(Arrays.asList(topicPartition));
-
-//        consumer.subscribe(Pattern.compile("kafka_topic"));
+//        consumer.subscribe(Pattern.compile("kafka_multip_topic"));
 
         System.out.println("Group ID: " + groupId + "   Servers: " + serversConfig);
+
+        consumer.assignment().forEach(topicPartition -> System.out.println(topicPartition.toString()));
 
         while (true)
         {
@@ -53,7 +54,7 @@ public class KafkaConsumerMain
             for (Iterator<ConsumerRecord<String, String>> recordIterator = records.iterator(); recordIterator.hasNext();)
             {
                 ConsumerRecord<String, String> record = recordIterator.next();
-                System.err.println(record.offset() + ". " + record.key() + " = " + record.value());
+                System.err.println("Partition: " + record.partition() + " [ " + record.offset() + ". " + record.key() + " = " + record.value() + " ]");
             }
         }
     }
