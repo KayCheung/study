@@ -38,5 +38,6 @@
     <module>rabbitmq-example</module>
     <module>kafka-example</module>
     <module>rocketmq-example</module>
+    <module>sharding-jdbc-example</module>
   </modules>
 </project>
