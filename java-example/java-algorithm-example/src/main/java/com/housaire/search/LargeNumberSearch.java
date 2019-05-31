@@ -110,9 +110,9 @@ public class LargeNumberSearch
 
     public static boolean search(int num)
     {
-        if (num == 0 && zeroHasExist)
+        if (num == 0)
         {
-            return true;
+            return zeroHasExist;
         }
 
         long beginTime = System.currentTimeMillis();
@@ -137,8 +137,8 @@ public class LargeNumberSearch
     public static void main(String[] args)
     {
         int max = 8;
-        LargeNumberSearch.load(max);
-        for (int i = 0; i <= max + 1; i++)
+        LargeNumberSearch.load(5, max);
+        for (int i = 1; i <= max + 1; i++)
         {
             boolean result = LargeNumberSearch.search(i);
             if (!result)
