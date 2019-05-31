@@ -10,8 +10,9 @@ public class LargeNumberSearch
 
     // 用来存储数值
     private static byte[] numberStorage;
-    // 每个字节最大存储8位数值
-    private static int maxDigits = 8;
+    // 数值是否存在标志位，一个字节最大能存储的位数,
+    // （一个字节8bit，应该是可以存储8个数值的标志位，但是存在符号位，所以存储7位）后续需要解决
+    private static int maxDigits = 7;
     // 字节最大数值
     private static int maxByte = 0x7f;
     // 字节数组起始索引偏移量
@@ -50,7 +51,7 @@ public class LargeNumberSearch
 
         for (int i = start; i <= end; i++)
         {
-            calculateBit(i);
+            storeNumToByte(i);
         }
         System.out.println("当前存储容量为：" + numberStorage.length + "  耗时：" + (System.currentTimeMillis() - beginTime) + " 毫秒");
     }
@@ -74,26 +75,48 @@ public class LargeNumberSearch
 
         for (int num : nums)
         {
-            calculateBit(num);
+            storeNumToByte(num);
         }
         System.out.println("当前存储容量为：" + numberStorage.length + "  耗时：" + (System.currentTimeMillis() - beginTime) + " 毫秒");
     }
 
-    private static void calculateBit(int i)
+    private static void storeNumToByte(int i)
     {
         // 获得当前数值在字节数组中所在的下标
-        int index = i / maxDigits - arrayStartOffset;
+        int index = getArrayIndex(i);
+        // 获得左位移数
+        int offset = getDispacementOffset(i, index);
+        // 计算该数值在一个字节中所在的位
+        // 比如 3 在字节中所在的位是：1 << 3 - 1, 0000 0100
+        numberStorage[index] = (byte) (numberStorage[index] | moveBitToOffset(offset));
+    }
+
+    private static byte moveBitToOffset(int offset)
+    {
+        if (offset == 7)
+        {
+            return (byte) (((fixed << offset) - 1) & maxByte);
+        }
+        return (byte) ((fixed << offset) & maxByte);
+    }
+
+    private static int getDispacementOffset(int num, int index)
+    {
+        // 计算当前数值在8个数值中具体是哪个数值
+        return num - (index * maxDigits) - 1;
+    }
+
+    private static int getArrayIndex(int num)
+    {
+        // 获得当前数值在字节数组中所在的下标
+        int index = num / maxDigits - arrayStartOffset;
         // 如果当前数值可以整除maxDigits需要将下标减去1
         // 比如：8 / 8 = 1，但是一个字节可以存储8个数值，所以 8 获得的下标应该还是 0
-        if (i % maxDigits == 0)
+        if (num % maxDigits == 0)
         {
             index--;
         }
-        // 计算数组所在下标中, 表示的8个数值的最小值
-        int min = i - (index * maxDigits);
-        // 计算该数值在一个字节中所在的位
-        // 比如 3 在字节中所在的位是：1 << 3 - 1, 0000 0100
-        numberStorage[index] = (byte) (numberStorage[index] | ((fixed << (min - 1)) & maxByte));
+        return index;
     }
 
     private static int getArrayStartOffset(int start)
@@ -117,36 +140,37 @@ public class LargeNumberSearch
 
         long beginTime = System.currentTimeMillis();
         // 获得当前数值在字节数组中所在的下标
-        int index = num / maxDigits - arrayStartOffset;
+        int index = getArrayIndex(num);
         if (index >= numberStorage.length)
         {
             return false;
         }
-        // 计算当前数值在8个数值中具体是哪个数值
-        int digit = num - (index * maxDigits);
+        // 获得左位移数
+        int offset = getDispacementOffset(num, index);
         // 查找该数值是否存在
-        boolean exist = ((digit & numberStorage[index]) == digit);
+        byte actualByte = moveBitToOffset(offset);
+        boolean exist = (actualByte & numberStorage[index]) == actualByte;
         long endTime = System.currentTimeMillis() - beginTime;
-        System.err.println("【 " + exist + " 】 - 数据 [ "
+        System.err.println("【 " + (exist ? "找到" : "未找到") + " 】 - 数据 [ "
                 + num + " ] 查找耗时：" + endTime
-                + " 毫秒, 所在下标：" + index + "  下标值为：" + numberStorage[index]);
+                + " 毫秒, 所在下标：" + index + "  下标值为：" + numberStorage[index] + " [" + Integer.toBinaryString(numberStorage[index]) + "]");
 
         return exist;
     }
 
     public static void main(String[] args)
     {
-        int max = 8;
-        LargeNumberSearch.load(5, max);
-        for (int i = 1; i <= max + 1; i++)
+        int max = 10008;
+//        LargeNumberSearch.load(max);
+        LargeNumberSearch.load(new int[] {1, 2, 5, 9, 10, 21, 99, 101, 112});
+        for (int i = 0; i <= 112 + 1; i++)
         {
             boolean result = LargeNumberSearch.search(i);
-            if (!result)
+            /*if (!result)
             {
                 System.out.println("未查到指定的数值：" + i);
                 break;
-            }
+            }*/
         }
-
     }
 }
