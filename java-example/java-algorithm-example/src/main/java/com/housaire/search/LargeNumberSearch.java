@@ -10,7 +10,7 @@ public class LargeNumberSearch
 
     // 用来存储数值
     private static byte[] numberStorage;
-    // 数值是否存在标志位，一个字节最大能存储的位数,
+    // 一个字节最大能存储的位数（数值是否存在标志位）
     // （一个字节8bit，应该是可以存储8个数值的标志位，但是存在符号位，所以存储7位）后续需要解决
     private static int maxDigits = 7;
     // 字节最大数值
@@ -160,7 +160,7 @@ public class LargeNumberSearch
 
     public static void main(String[] args)
     {
-        int max = 10008;
+//        int max = 10008;
 //        LargeNumberSearch.load(max);
         LargeNumberSearch.load(new int[] {1, 2, 5, 9, 10, 21, 99, 101, 112});
         for (int i = 0; i <= 112 + 1; i++)
