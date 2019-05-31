@@ -20,7 +20,7 @@ public class LargeNumberSearch
     // 固定值
     private final static byte fixed = 1;
     // 0 是否存在
-    private static boolean zeroHasExist = false;
+    private static boolean zeroExist = false;
 
     public static void load(int num)
     {
@@ -37,7 +37,7 @@ public class LargeNumberSearch
         long beginTime = System.currentTimeMillis();
         if (start == 0)
         {
-            zeroHasExist = true;
+            zeroExist = true;
             start = 1;
         }
 
@@ -135,7 +135,7 @@ public class LargeNumberSearch
     {
         if (num == 0)
         {
-            return zeroHasExist;
+            return zeroExist;
         }
 
         long beginTime = System.currentTimeMillis();
