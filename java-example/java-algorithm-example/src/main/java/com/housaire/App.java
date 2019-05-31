@@ -48,10 +48,36 @@ public class App
 //        System.out.println(maxCustomerNo);
 //
 //        System.out.println(String.format("%s-%05d", "SH", maxCustomerNo));
-        System.out.println(-1 ^ (-1 << 12));
-        System.out.println(Math.min(Runtime.getRuntime().availableProcessors() + 1, 32));
+//        System.out.println(-1 ^ (-1 << 12));
+//        System.out.println(Math.min(Runtime.getRuntime().availableProcessors() + 1, 32));
 
-        System.out.println(Integer.parseInt("10.96"));
+//        System.out.println(Integer.parseInt("10.96"));
+        byte b = 0;
+        byte fixed = 1;
+
+        for (int i = 1; i < 8; i++)
+        {
+            /*if (i == 6)
+            {
+                continue;
+            }*/
+            b = (byte) (b | (fixed << i - 1));
+//            System.err.println((fixed << i - 1));
+        }
+//        System.out.println(b);
+//        System.out.println(Integer.toBinaryString(b));
+
+        byte bt = 1;
+//        System.out.println(bt | (fixed << 7));
+//        System.out.println(Integer.toBinaryString((fixed << 7) - 1));
+//        System.out.println(Integer.toBinaryString(bt));
+
+        byte m = 127;
+//        System.out.println(9 & m);
+//        System.out.println(Integer.toBinaryString(9));
+//        System.out.println(Integer.toBinaryString(m));
+        System.out.println(0x7f);
+        System.out.println(1 << 3 - 1);
 
     }
 
