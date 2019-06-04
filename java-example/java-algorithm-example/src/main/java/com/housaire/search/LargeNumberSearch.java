@@ -51,10 +51,8 @@ public class LargeNumberSearch
         // 初始化数值存储对象
         numberStorage = new byte[numberStorageSize - arrayStartOffset + 1];
 
-        List<Integer> ignore = Arrays.asList(1, 2, 5, 9, 10);
         for (int i = start; i <= end && i > 0; i++)
         {
-            if (ignore.contains(i)) continue;
             storeNumToByte(i);
         }
         System.out.println("当前存储容量为：" + numberStorage.length + "  耗时：" + (System.currentTimeMillis() - beginTime) + " 毫秒");
