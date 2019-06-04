@@ -1,6 +1,8 @@
 package com.housaire.search;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 从40亿个正整数中查找一个正整数是否存在
@@ -49,8 +51,10 @@ public class LargeNumberSearch
         // 初始化数值存储对象
         numberStorage = new byte[numberStorageSize - arrayStartOffset + 1];
 
-        for (int i = start; i <= end; i++)
+        List<Integer> ignore = Arrays.asList(1, 2, 5, 9, 10);
+        for (int i = start; i <= end && i > 0; i++)
         {
+            if (ignore.contains(i)) continue;
             storeNumToByte(i);
         }
         System.out.println("当前存储容量为：" + numberStorage.length + "  耗时：" + (System.currentTimeMillis() - beginTime) + " 毫秒");
@@ -75,6 +79,10 @@ public class LargeNumberSearch
 
         for (int num : nums)
         {
+            if (num < 0)
+            {
+                continue;
+            }
             storeNumToByte(num);
         }
         System.out.println("当前存储容量为：" + numberStorage.length + "  耗时：" + (System.currentTimeMillis() - beginTime) + " 毫秒");
@@ -87,8 +95,15 @@ public class LargeNumberSearch
         // 获得左位移数
         int offset = getDispacementOffset(i, index);
         // 计算该数值在一个字节中所在的位
-        // 比如 3 在字节中所在的位是：1 << 3 - 1, 0000 0100
-        numberStorage[index] = (byte) (numberStorage[index] | moveBitToOffset(offset));
+        // 比如 3 在字节中所在的位是：1 << (3 - 1), 0000 0100
+        try
+        {
+            numberStorage[index] = (byte) (numberStorage[index] | moveBitToOffset(offset));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private static byte moveBitToOffset(int offset)
@@ -151,8 +166,7 @@ public class LargeNumberSearch
         byte actualByte = moveBitToOffset(offset);
         boolean exist = (actualByte & numberStorage[index]) == actualByte;
         long endTime = System.currentTimeMillis() - beginTime;
-        System.err.println("【 " + (exist ? "找到" : "未找到") + " 】 - 数据 [ "
-                + num + " ] 查找耗时：" + endTime
+        System.err.println("【 " + (exist ? "找到" : "未找到") + " 】 - 数据 [ " + num + " ] 查找耗时：" + endTime
                 + " 毫秒, 所在下标：" + index + "  下标值为：" + numberStorage[index] + " [" + Integer.toBinaryString(numberStorage[index]) + "]");
 
         return exist;
@@ -161,8 +175,8 @@ public class LargeNumberSearch
     public static void main(String[] args)
     {
 //        int max = 10008;
-//        LargeNumberSearch.load(max);
-        LargeNumberSearch.load(new int[] {1, 2, 5, 9, 10, 21, 99, 101, 112});
+        LargeNumberSearch.load(Integer.MAX_VALUE);
+//        LargeNumberSearch.load(new int[] {1, 2, 5, 9, 10, 21, 99, 101, 112});
         for (int i = 0; i <= 112 + 1; i++)
         {
             boolean result = LargeNumberSearch.search(i);
@@ -172,5 +186,6 @@ public class LargeNumberSearch
                 break;
             }*/
         }
+        System.out.println(Integer.toBinaryString(255));
     }
 }
