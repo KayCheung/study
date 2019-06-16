@@ -1,5 +1,7 @@
 package com.housaire;
 
+import java.util.Date;
+
 /**
  * Hello world!
  *
@@ -34,50 +36,63 @@ public class App
         System.out.println(this.getClass().getResource("").getPath());
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws CloneNotSupportedException
     {
-        /*char ret = 'A';
-        int f = 0xFF;
-        System.out.println(ret);
-        System.out.println((int)ret);
-        System.out.println(f);
-        System.out.println(ret & f);*/
+        A a = new A(10);
+        a.b = 5;
+        a. c = -19;
+        A b = a.clone();
+        b.bo.ba = 109;
+        System.out.println(b.a);
+        System.out.println(b.b);
+        System.out.println(b.c);
+        System.out.println(b.bo.ba);
+        System.out.println(a.bo.ba);
 
-//        String maxCustomerNoStr = "TJ-00670";
-//        Long maxCustomerNo = Long.parseLong(maxCustomerNoStr.substring(maxCustomerNoStr.indexOf("-") + 1));
-//        System.out.println(maxCustomerNo);
-//
-//        System.out.println(String.format("%s-%05d", "SH", maxCustomerNo));
-//        System.out.println(-1 ^ (-1 << 12));
-//        System.out.println(Math.min(Runtime.getRuntime().availableProcessors() + 1, 32));
+        System.out.println(new Date(1559616007000L).toLocaleString());
+        System.out.println(new Date(1559616007000L).toLocaleString());
+    }
 
-//        System.out.println(Integer.parseInt("10.96"));
-        byte b = 0;
-        byte fixed = 1;
+    static class B implements Cloneable
+    {
 
-        for (int i = 1; i < 8; i++)
+        private int ba;
+
+        public B (int ba)
         {
-            /*if (i == 6)
-            {
-                continue;
-            }*/
-            b = (byte) (b | (fixed << i - 1));
-//            System.err.println((fixed << i - 1));
+            this.ba = ba;
         }
-//        System.out.println(b);
-//        System.out.println(Integer.toBinaryString(b));
 
-        byte bt = 1;
-//        System.out.println(bt | (fixed << 7));
-//        System.out.println(Integer.toBinaryString((fixed << 7) - 1));
-//        System.out.println(Integer.toBinaryString(bt));
+        @Override
+        public B clone() throws CloneNotSupportedException
+        {
+            return (B) super.clone();
+        }
+    }
 
-        byte m = 127;
-//        System.out.println(9 & m);
-//        System.out.println(Integer.toBinaryString(9));
-//        System.out.println(Integer.toBinaryString(m));
-        System.out.println(0x7f);
-        System.out.println(1 << 3 - 1);
+    static class A implements Cloneable
+    {
+
+        private transient final int a;
+
+        private int b = 2;
+
+        private static int c = 3;
+
+        private B bo;
+
+        public A(int a)
+        {
+            this.a = a;
+            bo = new B(63);
+        }
+
+        public A clone() throws CloneNotSupportedException
+        {
+            A a = (A) super.clone();
+            a.bo = a.bo.clone();
+            return a;
+        }
 
     }
 
