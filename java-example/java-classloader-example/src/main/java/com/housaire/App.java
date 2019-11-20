@@ -6,7 +6,7 @@ import com.housaire.classloader.CustomClassLoader;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args ) throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {

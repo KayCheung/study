@@ -1,5 +1,7 @@
 package com.housaire;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,6 +10,14 @@ import java.util.Date;
  */
 public class App 
 {
+
+    public static int i = 8989123;
+
+    static
+    {
+        System.err.println("this is java-algorithm-example App!");
+    }
+
     public static void main1( String[] args ) throws InterruptedException
     {
         Thread t = new Thread(() -> {
@@ -51,6 +61,17 @@ public class App
 
         System.out.println(new Date(1559616007000L).toLocaleString());
         System.out.println(new Date(1559616007000L).toLocaleString());
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.err.println(timestamp);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        System.err.println(sdf.format(timestamp));
+
+        System.out.println(a);
+
+        System.out.println(a.getClass().getClassLoader());
+        System.out.println(String.class.getClassLoader());
+
     }
 
     static class B implements Cloneable

@@ -19,6 +19,7 @@ public class CustomClassLoader extends ClassLoader
 
     public CustomClassLoader(String path)
     {
+        super();
         if (!path.endsWith(File.separator))
         {
             path = path + File.separator;
@@ -29,6 +30,7 @@ public class CustomClassLoader extends ClassLoader
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
     {
+        getParent();
         if (name.startsWith("java."))
         {
             return super.loadClass(name, resolve);
