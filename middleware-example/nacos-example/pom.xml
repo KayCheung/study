@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.housaire</groupId>
+        <artifactId>middleware-example</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.housaire</groupId>
+    <artifactId>nacos-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>nacos-example</name>
+
+    <properties>
+        <nacos.version>1.4.4</nacos.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-common</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-api</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.9</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

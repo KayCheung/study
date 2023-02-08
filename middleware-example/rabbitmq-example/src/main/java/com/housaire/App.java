@@ -39,13 +39,28 @@ public class App
 
         channel.txSelect();
 
+        channel.addReturnListener(new ReturnCallback() {
+            @Override
+            public void handle(Return returnMessage) {
+
+            }
+        });
+
         channel.basicPublish("housaire_exchange_fanout", "", false, false, null, "hello first one".getBytes());
+        // 服务器会ACK给生产者
+        if (channel.waitForConfirms()) {
+            System.out.println("消息发送成功");
+        }
         channel.basicQos(1);
+
+        channel.waitForConfirmsOrDie();
 
         channel.txCommit();
 
         System.out.println("消息发送完成...");
         Thread.sleep(10000L);
+
+//        channel.basicGet()
 
         channel.basicConsume("housaire_queue_test", false, Thread.currentThread().getName(), false, false, null, new Consumer() {
 

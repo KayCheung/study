@@ -38,6 +38,10 @@ public class StaticClassLoader
         }
 
 
+        int h = 88;
+        h = h ^ (h >>> 16);
+        System.out.println("h == " + (2 ^ 2));
+
     }
 
 }

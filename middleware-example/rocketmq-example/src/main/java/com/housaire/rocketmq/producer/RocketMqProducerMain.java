@@ -23,6 +23,7 @@ public class RocketMqProducerMain
         producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 
+
         producer.send(new Message("test", "hello rocketmq".getBytes()));
     }
 

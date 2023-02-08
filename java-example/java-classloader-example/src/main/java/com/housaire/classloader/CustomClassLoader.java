@@ -30,7 +30,7 @@ public class CustomClassLoader extends ClassLoader
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
     {
-        getParent();
+//        getParent();
         if (name.startsWith("java."))
         {
             return super.loadClass(name, resolve);

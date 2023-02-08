@@ -1,0 +1,29 @@
+server:
+  port: 19090
+
+spring:
+  application:
+    name: gateway-api
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+
+
+zuul:
+  prefix: /api
+  routes:
+    gateway:
+      path: /gateway
+      serviceId: channel
+
+ribbon:
+  eureka:
+    enabled: false
+
+ccb:
+  ribbon:
+    listOfServers: http://localhost:2221

@@ -2,6 +2,9 @@ package com.housaire.list.linked;
 
 /**
  * 链表三等份
+ * 设三个链表：   第一个每循环一次走一步
+ *              第二个每循环一次走两步
+ *              第三个每循环一次走三步
  */
 public class LinkedListDivideEqually
 {

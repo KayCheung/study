@@ -51,6 +51,12 @@
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>

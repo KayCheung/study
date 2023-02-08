@@ -3,6 +3,7 @@ package com.housaire;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeMap;
 
 /**
  * Hello world!
@@ -48,7 +49,7 @@ public class App
 
     public static void main(String[] args) throws CloneNotSupportedException
     {
-        A a = new A(10);
+        /*A a = new A(10);
         a.b = 5;
         a. c = -19;
         A b = a.clone();
@@ -70,7 +71,12 @@ public class App
         System.out.println(a);
 
         System.out.println(a.getClass().getClassLoader());
-        System.out.println(String.class.getClassLoader());
+        System.out.println(String.class.getClassLoader());*/
+
+
+        Integer i1 = new Integer(1);
+        Integer i2 = new Integer(2);
+        System.out.println("Integer == " + (i1 == i2));
 
     }
 

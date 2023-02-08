@@ -12,5 +12,7 @@
     <module>java-algorithm-example</module>
     <module>java-classloader-example</module>
     <module>java-frame-example</module>
+    <module>java-serializable-example</module>
+    <module>java-clone-example</module>
   </modules>
 </project>

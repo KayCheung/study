@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" debug="false">
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M %line : [%X{userId}] %cyan(%msg%n)"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+    </root>
+
+</configuration>
