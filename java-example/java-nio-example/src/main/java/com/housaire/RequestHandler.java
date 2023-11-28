@@ -26,7 +26,10 @@ public class RequestHandler implements Callable<String>
     {
         try
         {
-            String request = new String(byteBuffer.array(), "UTF-8");
+            byteBuffer.flip();
+            byte[] array = new byte[byteBuffer.limit()];
+            byteBuffer.get(array, byteBuffer.arrayOffset(), byteBuffer.limit());
+            String request = new String(array, "UTF-8");
             System.err.println(request);
             if (null != request && request.startsWith("callback"))
             {

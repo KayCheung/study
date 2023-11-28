@@ -25,13 +25,20 @@ public class RandomRedPacket
         float amount = 10;
         int num = 900;
         double total = 0;
+        int a = 0, b = 0, c = 0;
         for (int i = num; i > 0; i--)
         {
             double money = RandomRedPacket.getRandomMoney(i, amount);
             total += money;
             amount = (float) (amount - money);
             System.out.println("第" + (num - i) + "个红包：" + money);
+            if (money == 0.01) a++;
+            else if(money == 0.02) b++;
+            else c++;
         }
+        System.out.println("得到 0.01 元红包的人数为：" + a);
+        System.out.println("得到 0.02 元红包的人数为：" + b);
+        System.out.println("得到 0.03 元红包的人数为：" + c);
         System.out.println(total);
     }
 

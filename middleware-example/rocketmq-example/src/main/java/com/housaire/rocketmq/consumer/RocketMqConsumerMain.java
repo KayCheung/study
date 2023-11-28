@@ -1,5 +1,6 @@
 package com.housaire.rocketmq.consumer;
 
+import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
@@ -24,6 +25,10 @@ public class RocketMqConsumerMain
     {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ROCKETMQ_PRODUCER");
         consumer.setNamesrvAddr("127.0.0.1:9876");
+
+        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("ROCKETMQ_PRODUCER");
+
+
 
         consumer.subscribe("test", MessageSelector.byTag(""));
 

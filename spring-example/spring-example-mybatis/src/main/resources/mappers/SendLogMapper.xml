@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.housaire.dal.mapper.SendLogMapper">
+    <select id="selectSendLogs" resultType="com.housaire.dal.domain.SendLog">
+        select * from send_log where mobile = #{mobile} and status = #{status} limit 10
+    </select>
+</mapper>

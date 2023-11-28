@@ -44,6 +44,8 @@ public class KafkaConsumerMain
 
 //        consumer.subscribe(Pattern.compile("kafka_multip_topic"));
 
+
+
         System.out.println("Group ID: " + groupId + "   Servers: " + serversConfig);
 
         consumer.assignment().forEach(topicPartition -> System.out.println(topicPartition.toString()));

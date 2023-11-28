@@ -12,6 +12,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author Zhang Kai
+ */
 public class CustomHandlerMethodReturnValueHandler implements HandlerMethodReturnValueHandler
 {
 
@@ -25,7 +28,9 @@ public class CustomHandlerMethodReturnValueHandler implements HandlerMethodRetur
     }
 
     @Override
-    public void handleReturnValue(Object returnValue, MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest) throws Exception
+    public void handleReturnValue(Object returnValue, MethodParameter methodParameter,
+                                  ModelAndViewContainer modelAndViewContainer,
+                                  NativeWebRequest nativeWebRequest) throws Exception
     {
         ResponseInfo responseInfo;
         if (returnValue instanceof ResponseInfo)
