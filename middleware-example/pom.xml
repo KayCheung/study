@@ -34,12 +34,12 @@
 
     <modules>
         <module>zookeeper-example</module>
-    <module>redis-example</module>
-    <module>rabbitmq-example</module>
-    <module>kafka-example</module>
-    <module>rocketmq-example</module>
-    <module>sharding-jdbc-example</module>
-    <module>apollo-example</module>
-    <module>nacos-example</module>
+        <module>redis-example</module>
+        <module>rabbitmq-example</module>
+        <module>kafka-example</module>
+        <module>rocketmq-example</module>
+        <module>sharding-jdbc-example</module>
+        <module>apollo-example</module>
+        <module>nacos-example</module>
   </modules>
 </project>

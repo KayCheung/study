@@ -8,6 +8,7 @@ public class SafeListener {
 
     private SafeListener() {
         listener = new EventListener() {
+            @Override
             public void onEvent(Event e) {
                 doSomething(e);
         }
@@ -36,7 +37,7 @@ public class SafeListener {
     }
 
     public static void main(String[] args) {
-        SafeListener.newInstance(new EventSource() {
+        SafeListener listener = SafeListener.newInstance(new EventSource() {
             @Override
             public void registerListener(EventListener e) {
                     e.onEvent(new Event() {

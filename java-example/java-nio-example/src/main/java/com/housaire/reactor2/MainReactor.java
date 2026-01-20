@@ -111,4 +111,8 @@ public class MainReactor extends Reactor
 
     }
 
+    public static void main(String[] args) throws IOException {
+        new Thread(new MainReactor(19090)).start();
+    }
+
 }

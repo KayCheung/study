@@ -33,19 +33,20 @@ public class SocketReadWriteHandler implements Runnable
         ByteBuffer byteBuffer = ByteBuffer.allocate(8192);
         try
         {
-            this.socketChannel.read(byteBuffer);
-            // 激活线程池 处理这些request
-            ExecutionHandler.getExecutionHandler().execute(byteBuffer, () -> {
-                try
-                {
-                    log.info("回写客户端...");
-                    this.socketChannel.write(ByteBuffer.wrap("收到了你的请求".getBytes("UTF-8")));
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            });
+            int read = 0;
+            while ((read = this.socketChannel.read(byteBuffer)) > 0)
+            {
+                System.out.println("socketChannel.read: " + read);
+                // 激活线程池 处理这些request
+                ExecutionHandler.getExecutionHandler().execute(byteBuffer, () -> {
+                    try {
+                        log.info("回写客户端...");
+                        this.socketChannel.write(ByteBuffer.wrap("收到了你的请求".getBytes("UTF-8")));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         }
         catch (IOException e)
         {

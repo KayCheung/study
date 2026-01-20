@@ -22,7 +22,7 @@ public class CustomerController
 {
 
     @Autowired
-    @Qualifier("customerService")
+    @Qualifier("customerServiceImpl")
     private CustomerService customerService;
 
     @ApiOperation("新增客户并返回客户ID")
