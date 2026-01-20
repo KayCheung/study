@@ -3,7 +3,6 @@ package com.housaire;
 import com.baidu.aip.ocr.AipOcr;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**

@@ -25,5 +25,29 @@
             <artifactId>tess4j</artifactId>
             <version>3.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/json-20160810.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>aip-java-sdk</artifactId>
+            <version>4.11.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/aip-java-sdk-4.11.1.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

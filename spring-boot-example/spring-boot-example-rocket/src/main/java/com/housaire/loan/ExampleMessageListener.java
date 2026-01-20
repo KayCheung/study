@@ -1,4 +1,4 @@
-package com.housaire.example;
+package com.housaire.loan;
 
 import com.housaire.rocket.AbstractRocketMqMessageListener;
 import com.housaire.rocket.annotation.RocketMqConsumer;

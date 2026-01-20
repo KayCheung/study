@@ -1,10 +1,8 @@
 package com.housaire.study.algorithms.hard;
 
-import java.math.BigDecimal;
-
 /**
  * @author <a href="mailto:zhangkai@chinayie.com">张凯</a>
- * @description:
+ * @description: 寻找两个有序数组的中位数
  * @date 2019/1/26 12:44
  * @see
  * @since 1.0.0
@@ -26,106 +24,75 @@ public class MedianOfTwoStoredArrays
      *   nums2 = [3, 4]
      *   The median is (2 + 3)/2 = 2.5
      * </pre>
-     * @param nums1
-     * @param nums2
-     * @return
+     * @param nums1 第一个有序数组
+     * @param nums2 第二个有序数组
+     * @return 中位数
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2)
     {
-        // 需要做优化，可以只
-        int[] largeArray = null;
-        int[] smallArray = null;
-        if (nums1.length > nums2.length)
-        {
-            largeArray = nums1;
-            smallArray = nums2;
+        // 确保 nums1 是较短的数组，以优化时间复杂度到 O(log(min(m,n)))
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
         }
-        else
-        {
-            largeArray = nums2;
-            smallArray = nums1;
-        }
-        int sumLength = nums1.length + nums2.length;
-        int mergeArrayIndex = 0, largeArrayIndex = 0, smallArrayIndex = 0, middleLength = sumLength / 2 + 1;
-        int[] mergeArray = new int[middleLength];
-        int largeValue = 0, smallValue = 0;
-        while (true)
-        {
-            if (largeArrayIndex < largeArray.length)
-            {
-                largeValue = largeArray[largeArrayIndex];
-            }
-            if (smallArrayIndex < smallArray.length)
-            {
-                smallValue = smallArray[smallArrayIndex];
-            }
-            if (largeArrayIndex < largeArray.length && smallArrayIndex < smallArray.length)
-            {
-                if (largeValue < smallValue)
-                {
-                    largeArrayIndex++;
-                    mergeArray[mergeArrayIndex++] = largeValue;
+        
+        int m = nums1.length;
+        int n = nums2.length;
+        int left = 0, right = m;
+        
+        while (left <= right) {
+            // 在 nums1 中的分割点
+            int partitionX = (left + right) / 2;
+            // 在 nums2 中的分割点，确保左半部分元素总数等于右半部分
+            int partitionY = (m + n + 1) / 2 - partitionX;
+            
+            // 获取分割点左右的元素值
+            int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];
+            int minRightX = (partitionX == m) ? Integer.MAX_VALUE : nums1[partitionX];
+            
+            int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY - 1];
+            int minRightY = (partitionY == n) ? Integer.MAX_VALUE : nums2[partitionY];
+            
+            // 检查是否找到了正确的分割点
+            if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+                // 找到了正确的分割点
+                if ((m + n) % 2 == 0) {
+                    // 总长度为偶数，返回中间两个数的平均值
+                    return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2.0;
+                } else {
+                    // 总长度为奇数，返回左半部分的最大值
+                    return Math.max(maxLeftX, maxLeftY);
                 }
-                else if (largeValue == smallValue)
-                {
-                    smallArrayIndex++;
-                    mergeArray[mergeArrayIndex++] = smallValue;
-                    if (mergeArrayIndex + 1 < middleLength)
-                    {
-                        largeArrayIndex++;
-                        mergeArray[mergeArrayIndex++] = largeValue;
-                    }
-                }
-                else
-                {
-                    smallArrayIndex++;
-                    mergeArray[mergeArrayIndex++] = smallValue;
-                }
-            }
-            else
-            {
-                if (largeArrayIndex < largeArray.length)
-                {
-                    largeArrayIndex++;
-                    mergeArray[mergeArrayIndex++] = largeValue;
-                }
-                else
-                {
-                    smallArrayIndex++;
-                    mergeArray[mergeArrayIndex++] = smallValue;
-                }
-            }
-            if (mergeArrayIndex >= middleLength)
-            {
-                break;
+            } else if (maxLeftX > minRightY) {
+                // nums1 的左半部分太大，需要向左移动
+                right = partitionX - 1;
+            } else {
+                // nums1 的左半部分太小，需要向右移动
+                left = partitionX + 1;
             }
         }
-
-        int finalValue = 0;
-        if (sumLength % 2 == 0)
-        {
-            int index = sumLength / 2;
-            finalValue = mergeArray[index - 1] + mergeArray[index];
-        }
-        else
-        {
-            int index = sumLength / 2;
-            return mergeArray[index];
-        }
-        if (finalValue % 2 == 0)
-        {
-            return finalValue / 2;
-        }
-        else
-        {
-            return (finalValue / 2) + 0.5;
-        }
+        
+        // 理论上不会到达这里
+        throw new IllegalArgumentException("输入的数组不是有序的");
     }
 
     public static void main(String[] args)
     {
-        MedianOfTwoStoredArrays medianOfTwoStoredArrays = new MedianOfTwoStoredArrays();
-        System.out.println(medianOfTwoStoredArrays.findMedianSortedArrays(new int[]{1,5,9}, new int[]{1,1,1}));
+        MedianOfTwoStoredArrays solution = new MedianOfTwoStoredArrays();
+        
+        // 测试用例1: [1,3], [2] -> 2.0
+        System.out.println("测试1: " + solution.findMedianSortedArrays(new int[]{1, 3}, new int[]{2}));
+        
+        // 测试用例2: [1,2], [3,4] -> 2.5
+        System.out.println("测试2: " + solution.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}));
+        
+        // 测试用例3: [1,5,9], [1,1,1] -> 1.0
+        System.out.println("测试3: " + solution.findMedianSortedArrays(new int[]{1, 5, 9}, new int[]{1, 1, 1}));
+        
+        // 测试用例4: [], [1] -> 1.0
+        System.out.println("测试4: " + solution.findMedianSortedArrays(new int[]{}, new int[]{1}));
+        
+        // 测试用例5: [2], [] -> 2.0
+        System.out.println("测试5: " + solution.findMedianSortedArrays(new int[]{2}, new int[]{}));
     }
 
 }
